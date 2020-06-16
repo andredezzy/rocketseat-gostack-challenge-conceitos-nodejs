@@ -73,7 +73,7 @@ describe("Repositories", () => {
   });
 
   it("should not be able to update a repository that does not exist", async () => {
-    await request(app).put(`/repositories/123`).expect(404);
+    await request(app).put(`/repositories/123`).expect(400);
   });
 
   it("should not be able to update repository likes manually", async () => {
@@ -105,7 +105,7 @@ describe("Repositories", () => {
         techs: ["Node", "Express", "TypeScript"]
       });
 
-    await request(app).delete(`/repositories/${response.body.id}`).expect(200);
+    await request(app).delete(`/repositories/${response.body.id}`).expect(204);
 
     const repositories = await request(app).get("/repositories");
 
@@ -115,6 +115,6 @@ describe("Repositories", () => {
   });
 
   it("should not be able to delete a repository that does not exist", async () => {
-    await request(app).delete(`/repositories/123`).expect(404);
+    await request(app).delete(`/repositories/123`).expect(400);
   });
 });
